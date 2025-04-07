@@ -2,6 +2,7 @@ package team.creative.littletiles.common.gui.control.animation;
 
 import team.creative.creativecore.common.gui.Align;
 import team.creative.creativecore.common.gui.GuiParent;
+import team.creative.creativecore.common.gui.control.simple.GuiButton;
 import team.creative.creativecore.common.gui.control.simple.GuiButtonIcon;
 import team.creative.creativecore.common.gui.control.simple.GuiCheckBox;
 import team.creative.creativecore.common.gui.control.tree.GuiTree;
@@ -20,12 +21,12 @@ public class GuiAnimationPanel extends GuiParent {
     public GuiAnimationPanel(GuiTree tree, GuiAnimationViewerStorage storage, boolean options, GuiRecipeAnimationHandler animation) {
         super("animation", GuiFlow.STACK_Y);
         setExpandable();
-        
+
         this.tree = tree;
         this.storage = storage;
         this.options = options;
         this.animation = animation;
-        
+
         GuiAnimationViewer viewer = new GuiAnimationViewer("viewer", storage);
         add(viewer.setExpandable());
         

@@ -16,7 +16,7 @@ import team.creative.creativecore.common.gui.GuiControl;
 import team.creative.creativecore.common.gui.style.ControlFormatting;
 
 public class GuiActionDisplay extends GuiControl {
-    
+
     protected List<ActionMessage> messages = new ArrayList<>();
     
     private int maxActions;
@@ -115,7 +115,7 @@ public class GuiActionDisplay extends GuiControl {
         pose.pushPose();
         while (i < messages.size()) {
             ActionMessage message = messages.get(i);
-            
+
             long timer = System.currentTimeMillis() - message.timestamp;
             if (timer >= totalTime)
                 removeMessage(i);

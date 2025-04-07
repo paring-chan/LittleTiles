@@ -1,6 +1,7 @@
 package team.creative.littletiles.client.render.overlay;
 
 import java.util.List;
+import java.util.ListIterator;
 
 import com.google.common.base.Strings;
 
@@ -8,10 +9,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.multiplayer.chat.ChatLog;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.commands.TellRawCommand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import team.creative.creativecore.common.gui.GuiControl;
@@ -22,6 +27,7 @@ import team.creative.creativecore.common.gui.integration.ScreenEventListener;
 import team.creative.creativecore.common.gui.style.ControlFormatting;
 import team.creative.creativecore.common.gui.style.GuiStyle;
 import team.creative.creativecore.common.network.CreativePacket;
+import team.creative.creativecore.common.util.math.geo.Rect;
 import team.creative.creativecore.common.util.mc.LanguageUtils;
 import team.creative.creativecore.common.util.type.list.SingletonList;
 import team.creative.creativecore.common.util.type.list.Tuple;
@@ -42,6 +48,8 @@ public class OverlayRenderer implements IGuiIntegratedParent, LevelAwareHandler 
         
         @Override
         public void create() {
+            rect.setWidth(100, 100);
+            rect.setHeight(100, 100);
             addOverlayControl(actionDisplay, OverlayPosition.ACTION_BAR);
         }
         
@@ -58,7 +66,7 @@ public class OverlayRenderer implements IGuiIntegratedParent, LevelAwareHandler 
         public boolean hasGrayBackground() {
             return false;
         }
-        
+
         @Override
         public void flowY(int width, int height, int preferred) {
             super.flowY(width, height, preferred);
@@ -88,7 +96,18 @@ public class OverlayRenderer implements IGuiIntegratedParent, LevelAwareHandler 
     }
     
     public void displayActionMessage(List<Component> message) {
-        actionDisplay.addMessage(message);
+        var result = Component.literal("LittleTiles Message:");
+
+        for (Component component : message) {
+            result.append("\n");
+            result.append(component);
+        }
+
+        result.append("\n---------");
+
+        MC.getChatListener().handleSystemMessage(result, false);
+//        MC.getChatListener().handlePlayerChatMessage(getPlayer());
+//        TellRawCommand
     }
     
     public void renderPost(RenderGuiEvent.Post event) {

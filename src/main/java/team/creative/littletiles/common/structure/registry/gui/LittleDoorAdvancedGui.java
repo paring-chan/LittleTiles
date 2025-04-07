@@ -14,6 +14,7 @@ import team.creative.creativecore.common.gui.VAlign;
 import team.creative.creativecore.common.gui.control.collection.GuiComboBox;
 import team.creative.creativecore.common.gui.control.parent.GuiLabeledControl;
 import team.creative.creativecore.common.gui.control.parent.GuiTabs;
+import team.creative.creativecore.common.gui.control.simple.GuiButton;
 import team.creative.creativecore.common.gui.control.simple.GuiCheckBox;
 import team.creative.creativecore.common.gui.control.simple.GuiLabel;
 import team.creative.creativecore.common.gui.control.simple.GuiTextfield;
@@ -126,7 +127,7 @@ public class LittleDoorAdvancedGui extends LittleStructureGuiControl {
         settings.add(new GuiCheckBox("rightClick", rightClick).setTranslate("gui.rightclick").setTooltip("gui.door.rightclick.tooltip"));
         settings.add(new GuiCheckBox("noClip", noClip).setTranslate("gui.no_clip").setTooltip("gui.door.no_clip.tooltip"));
         settings.add(new GuiCheckBox("playPlaceSounds", playPlaceSounds).setTranslate("gui.door.play_place_sound").setTooltip("gui.door.play_place_sound.tooltip"));
-        
+
         settings.add(new GuiLabeledControl(Component.translatable("gui.duration").append(":"), new GuiTextfield("duration", "" + duration).setNumbersOnly()));
         
         GuiIsoAnimationViewer viewer = upper.get("viewer");
